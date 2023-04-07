@@ -5,6 +5,28 @@ let accounts;
 
 async function loadAccounts() {
   accounts = await web3.eth.getAccounts();
+  if (accounts.length > 0) {
+    document.getElementById("account").innerText = `Account: ${accounts[0]}`;
+    document.getElementById("getBalance").disabled = false;
+    document.getElementById("claim").disabled = false;
+  } else {
+    document.getElementById("account").innerText = "Account: N/A";
+    document.getElementById("getBalance").disabled = true;
+    document.getElementById("claim").disabled = true;
+  }
+}
+
+async function connectWallet() {
+  if (window.ethereum) {
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      loadAccounts();
+    } catch (err) {
+      console.error("User denied account access");
+    }
+  } else {
+    console.error("No web3 provider detected");
+  }
 }
 
 async function getBalance() {
@@ -23,6 +45,7 @@ async function claim() {
   }
 }
 
+document.getElementById("connectWallet").addEventListener("click", connectWallet);
 document.getElementById("getBalance").addEventListener("click", getBalance);
 document.getElementById("claim").addEventListener("click", claim);
 window.addEventListener("load", loadAccounts);
