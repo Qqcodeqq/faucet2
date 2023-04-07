@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Faucet Contract UI</title>
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+	<script>
+		window.addEventListener('load', async () => {
+			// Connect to the Ethereum network
+			if (window.ethereum) {
+				await window.ethereum.request({ method: 'eth_requestAccounts' })
+				window.web3 = new Web3(window.ethereum)
+			} else if (window.web3) {
+				window.web3 = new Web3(window.web3.currentProvider)
+			} else {
+				console.log('No web3 provider detected')
+			}
+
+			// Initialize the contract
+			const contractAddress = '0x1234567890123456789012345678901234567890'
+			const contract = new window.web3.eth.Contract(faucetABI, contractAddress)
+
+			// Get the contract balance and display it on the web page
+			const balance = await contract.methods.getBalance().call()
+			document.getElementById('balance').innerHTML = balance
+
+			// Add a click handler to the claim button
+			document.getElementById('claim').addEventListener('click', async () => {
+				// Call the claim function of the contract
+				await contract.methods.claim().send({ from: window.ethereum.selectedAddress })
+
+				// Update the balance on the web page
+				const newBalance = await contract.methods.getBalance().call()
+				document.getElementById('balance').innerHTML = newBalance
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>Faucet Contract UI</h1>
+	<p>Current balance: <span id="balance"></span></p>
+	<button id="claim">Claim Ether</button>
+</body>
+</html>
