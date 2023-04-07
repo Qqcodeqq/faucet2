@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faucet Web UI</title>
+    <title>Goerli Faucet</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Faucet Web UI</h1>
+    <h1>Uniswap-like Interface</h1>
     <div class="container">
-        <button id="connectWallet">Connect Wallet</button>
+        <button id="connectWallet" class="button">Connect Wallet</button>
         <p id="account">Account: N/A</p>
-        <button id="getBalance" disabled>Get Balance</button>
+        <button id="getBalance" class="button" disabled>Get Balance</button>
         <p id="balance">Balance: N/A</p>
-        <button id="claim" disabled>Claim</button>
+        <button id="claim" class="button" disabled>Claim</button>
         <p id="claimStatus"></p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
