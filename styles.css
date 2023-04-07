@@ -1,5 +1,12 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f7f8fa;
+}
+
+h1 {
+    text-align: center;
+    color: #0d122b;
+    margin-bottom: 40px;
 }
 
 .container {
@@ -8,6 +15,29 @@ body {
     align-items: center;
 }
 
-button {
+.button {
+    background-color: #2172e5;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 12px 24px;
     margin: 10px;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #4a8af4;
+}
+
+button:disabled {
+    background-color: #a7b6d1;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: #a7b6d1;
 }
